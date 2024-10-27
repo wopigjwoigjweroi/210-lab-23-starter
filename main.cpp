@@ -14,7 +14,7 @@ void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
 
-void add_goat(list<Goat> & trip, string name[], string color[]) {
+void add_goat(list<Goat> &trip, string name[], string color[]) {
 
     int names = rand() % SZ_NAMES;
 
@@ -27,7 +27,7 @@ void add_goat(list<Goat> & trip, string name[], string color[]) {
     trip.push_back(goat); 
 }
 
-void delete_goat(list<Goat> & trip) {
+void delete_goat(list<Goat> &trip) {
 
     int i = select_goat(trip); 
 
@@ -38,7 +38,7 @@ void delete_goat(list<Goat> & trip) {
     trip.erase(a); 
 }
 
-void display_trip(list<Goat> &trip) {
+void display_trip(const list<Goat> trip) {
 
     int c = 1; 
 
@@ -60,6 +60,7 @@ int select_goat(const list<Goat> trip) {
     }
 
     return c; 
+
 }
 
 int main_menu() {
@@ -77,6 +78,8 @@ int main_menu() {
     return select; 
 }
 
+
+
 int main() {
 
     srand(time(0));
@@ -86,17 +89,43 @@ int main() {
 
     // read & populate arrays for names and colors
     fstream fin("names.txt");
-    string names[SZ_NAMES];
     int i = 0;
-    while (fin >> names[i++]);
+    while (fin >> names[i++] && i < SZ_NAMES);
     fin.close();
-    ifstream fin1("colors.txt");
-    string colors[SZ_COLORS];
+
+    fstream fin1("colors.txt");
     i = 0;
-    while (fin1 >> colors[i++]);
+    while (fin1 >> colors[i++] && i < SZ_COLORS); 
     fin1.close();
 
+    bool run = true; 
 
+    while (run) {
+
+        switch (main_menu()) {
+
+            case 1: 
+                add_goat(trip, names, colors); 
+
+                break; 
+
+            case 2: 
+                delete_goat(trip);
+
+                break; 
+
+            case 3: 
+                display_trip(trip);
+
+                break; 
+
+            case 4:
+                run = false; 
+
+                break; 
+
+        }
+    }
 
 
     return 0;
