@@ -78,8 +78,6 @@ int main_menu() {
     return select; 
 }
 
-
-
 int main() {
 
     srand(time(0));
