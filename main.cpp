@@ -25,6 +25,8 @@ void add_goat(list<Goat> &trip, string name[], string color[]) {
     Goat goat(name[names], ages, color[colors]); 
 
     trip.push_back(goat); 
+
+    cout << "Added goat\n"; 
 }
 
 void delete_goat(list<Goat> &trip) {
@@ -36,6 +38,11 @@ void delete_goat(list<Goat> &trip) {
     advance(a, i -1); 
 
     trip.erase(a); 
+
+     if (trip.empty()) {
+
+         return;
+    }
 }
 
 void display_trip(const list<Goat> trip) {
@@ -44,7 +51,12 @@ void display_trip(const list<Goat> trip) {
 
     for (const auto &goat : trip) {
 
-        cout << "[ " << c++ << "]" << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")" << endl; 
+        cout << "[" << c++ << "]" << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")" << endl; 
+    }
+
+    if (trip.empty()) {
+
+        return; 
     }
 }
 
@@ -55,6 +67,8 @@ int select_goat(const list<Goat> trip) {
     int c; 
 
     while (c < 1 || c > trip.size()) {
+
+        cin >> c; 
 
         cin >> c; 
     }
